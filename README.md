@@ -1,6 +1,6 @@
-# Shopify Metafield Inspector
+# Doctor Store
 
-A self-hosted Laravel application that connects to your Shopify stores, scans metafields, and surfaces quality issues: missing definitions, empty values, unused fields, duplicate namespaces, and more.
+ A Laravel application that connects to your Shopify stores, scans metafields, and surfaces quality issues: missing definitions, empty values, unused fields, duplicate namespaces, and more.
 
 ## Requirements
 
