@@ -45,10 +45,10 @@ export default function StoresIndex({
     );
 
     useEffect(() => {
-        // Fast poll when a scan is in progress, slow poll otherwise to catch auto-scans starting.
+        // Fast poll when a scan is in progress, slower poll otherwise to catch auto-scans starting.
         const interval = setInterval(
             () => router.reload({ only: ['stores'] }),
-            hasActiveScans ? 4000 : 20000,
+            hasActiveScans ? 4000 : 5000,
         );
         return () => clearInterval(interval);
     }, [hasActiveScans]);
