@@ -1,5 +1,5 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import { dashboard, login, register } from '@/routes';
+import { dashboard, login } from '@/routes';
 
 export default function Welcome({
     canRegister = true,
@@ -39,7 +39,7 @@ export default function Welcome({
                                 </Link>
                                 {canRegister && (
                                     <Link
-                                        href={register()}
+                                        href="/register"
                                         className="inline-flex items-center rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90"
                                     >
                                         Register
