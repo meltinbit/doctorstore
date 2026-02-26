@@ -1,6 +1,6 @@
 # Doctor Store
 
- A Laravel application that connects to your Shopify stores, scans metafields, and surfaces quality issues: missing definitions, empty values, unused fields, duplicate namespaces, and more.
+A Laravel application that connects to your Shopify stores, scans metafields, and surfaces quality issues: missing definitions, empty values, unused fields, duplicate namespaces, and more.
 
 ## Requirements
 
@@ -10,7 +10,27 @@
 
 ---
 
-## 1. Create a Shopify App
+## 1. Clone the repositories
+
+This app depends on `doctorstore-core` as a local Composer package. Both repos must be cloned **side by side** in the same parent folder:
+
+```bash
+git clone https://github.com/meltinbit/doctorstore-core doctorstore-core
+git clone https://github.com/meltinbit/doctorstore doctorstore
+cd doctorstore
+```
+
+The resulting structure must be:
+
+```
+your-folder/
+├── doctorstore-core/
+└── doctorstore/          ← work from here
+```
+
+---
+
+## 2. Create a Shopify App
 
 1. Go to [dev.shopify.com/dashboard](https://dev.shopify.com/dashboard) → **Apps** → **Create app**
 2. Select **Create app manually**
@@ -27,7 +47,7 @@
 
 ---
 
-## 2. Configure
+## 3. Configure
 
 ```bash
 cp .env.example .env
@@ -49,7 +69,7 @@ SHOPIFY_REDIRECT_URI=https://yourdomain.com/shopify/callback
 
 ---
 
-## 3. Generate an APP_KEY
+## 4. Generate an APP_KEY
 
 The app needs a permanent encryption key. Start the stack once to get a generated key:
 
@@ -74,7 +94,7 @@ docker compose restart app
 
 ---
 
-## 4. Start
+## 5. Start
 
 ```bash
 docker compose up -d
@@ -87,7 +107,7 @@ On first boot, the application automatically:
 
 ---
 
-## 5. First Access
+## 6. First Access
 
 Open `https://yourdomain.com`, register your account, then connect your Shopify store.
 
