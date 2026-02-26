@@ -11,9 +11,22 @@ echo "MySQL is ready."
 
 # Generate APP_KEY if not set
 if [ -z "$APP_KEY" ]; then
-    echo "Generating APP_KEY..."
+    echo "APP_KEY not set — generating one for this session."
+    echo "For production, set APP_KEY in your .env file."
+    # artisan key:generate needs a .env file to write the key into
+    if [ ! -f /var/www/html/.env ]; then
+        cp /var/www/html/.env.example /var/www/html/.env
+    fi
     php artisan key:generate --no-interaction --force
+    # Export the generated key so all subsequent artisan calls and php-fpm inherit it
+    export APP_KEY
+    APP_KEY=$(grep '^APP_KEY=' /var/www/html/.env | cut -d'=' -f2-)
 fi
+
+# Sync built assets into the shared volume so nginx can serve them.
+# This runs on every start to ensure assets stay fresh after rebuilds.
+echo "Syncing public assets..."
+cp -a /var/www/html/public-snapshot/. /var/www/html/public/
 
 # Only the app (php-fpm) service runs migrations and warms the cache.
 # queue and scheduler depend on app being healthy (port 9000 open),

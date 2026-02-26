@@ -9,6 +9,7 @@ services:
       APP_DOMAIN: ${APP_DOMAIN:-localhost}
     volumes:
       - app_storage:/var/www/html/storage
+      - app_public:/var/www/html/public
     networks:
       - app_network
     depends_on:
@@ -24,9 +25,12 @@ services:
   nginx:
     image: nginx:alpine
     restart: unless-stopped
+    ports:
+      - "8089:80"   # exposed for local ngrok dev — firewall this port in production
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - app_storage:/var/www/html/storage:ro
+      - app_public:/var/www/html/public:ro
     networks:
       - app_network
     depends_on:
@@ -104,6 +108,7 @@ volumes:
   caddy_data:
   caddy_config:
   app_storage:
+  app_public:
 
 networks:
   app_network:
