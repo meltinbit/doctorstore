@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Shopify;
 
-use App\Enums\ScanStatus;
 use App\Http\Controllers\Controller;
-use App\Jobs\RunStoreScanJob;
+use DoctorStore\Core\Enums\ScanStatus;
+use DoctorStore\Core\Jobs\RunStoreScanJob;
 use App\Models\Scan;
 use App\Models\ShopifyStore;
 use Illuminate\Http\RedirectResponse;

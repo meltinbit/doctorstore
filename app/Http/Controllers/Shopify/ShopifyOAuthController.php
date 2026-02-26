@@ -22,9 +22,9 @@ class ShopifyOAuthController extends Controller
         $request->session()->put('shopify_oauth_state', $state);
 
         $query = http_build_query([
-            'client_id' => config('shopify.client_id'),
-            'scope' => config('shopify.scopes'),
-            'redirect_uri' => config('shopify.redirect_uri'),
+            'client_id' => config('doctorstore.client_id'),
+            'scope' => config('doctorstore.scopes'),
+            'redirect_uri' => config('doctorstore.redirect_uri'),
             'state' => $state,
         ]);
 
@@ -47,17 +47,17 @@ class ShopifyOAuthController extends Controller
         $code = $request->query('code');
 
         $tokenResponse = Http::post("https://{$shop}/admin/oauth/access_token", [
-            'client_id' => config('shopify.client_id'),
-            'client_secret' => config('shopify.client_secret'),
+            'client_id' => config('doctorstore.client_id'),
+            'client_secret' => config('doctorstore.client_secret'),
             'code' => $code,
         ]);
 
         $accessToken = $tokenResponse->json('access_token');
-        $scopes = $tokenResponse->json('scope', config('shopify.scopes'));
+        $scopes = $tokenResponse->json('scope', config('doctorstore.scopes'));
 
         $shopResponse = Http::withHeaders([
             'X-Shopify-Access-Token' => $accessToken,
-        ])->get("https://{$shop}/admin/api/".config('shopify.api_version').'/shop.json');
+        ])->get("https://{$shop}/admin/api/".config('doctorstore.api_version').'/shop.json');
 
         $shopName = $shopResponse->json('shop.name');
 
@@ -81,6 +81,6 @@ class ShopifyOAuthController extends Controller
         ksort($params);
         $message = collect($params)->map(fn ($v, $k) => "{$k}={$v}")->implode('&');
 
-        return hash_equals(hash_hmac('sha256', $message, config('shopify.client_secret')), $hmac);
+        return hash_equals(hash_hmac('sha256', $message, config('doctorstore.client_secret')), $hmac);
     }
 }

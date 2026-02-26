@@ -70,7 +70,7 @@ test('successful callback saves store and redirects to stores index', function (
     $params = ['code' => $code, 'shop' => $shop, 'state' => $state];
     ksort($params);
     $message = collect($params)->map(fn ($v, $k) => "{$k}={$v}")->implode('&');
-    $hmac = hash_hmac('sha256', $message, config('shopify.client_secret', 'test-secret'));
+    $hmac = hash_hmac('sha256', $message, config('doctorstore.client_secret', 'test-secret'));
 
     Http::fake([
         "https://{$shop}/admin/oauth/access_token" => Http::response([
@@ -118,7 +118,7 @@ test('reconnecting an existing store updates it without creating duplicates', fu
     $params = ['code' => $code, 'shop' => $shop, 'state' => $state];
     ksort($params);
     $message = collect($params)->map(fn ($v, $k) => "{$k}={$v}")->implode('&');
-    $hmac = hash_hmac('sha256', $message, config('shopify.client_secret', 'test-secret'));
+    $hmac = hash_hmac('sha256', $message, config('doctorstore.client_secret', 'test-secret'));
 
     Http::fake([
         "https://{$shop}/admin/oauth/access_token" => Http::response([

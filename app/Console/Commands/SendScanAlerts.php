@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\ScanStatus;
 use App\Mail\ScanAlertMail;
+use DoctorStore\Core\Enums\ScanStatus;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;

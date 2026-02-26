@@ -35,6 +35,9 @@ if [ "$1" = "php-fpm" ]; then
     echo "Running migrations..."
     php artisan migrate --force --no-interaction
 
+    echo "Seeding admin user..."
+    php artisan db:seed --class=AdminSeeder --force --no-interaction
+
     echo "Caching configuration..."
     php artisan config:cache
     php artisan route:cache

@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\ScanStatus;
-use App\Jobs\RunStoreScanJob;
+use DoctorStore\Core\Enums\ScanStatus;
+use DoctorStore\Core\Jobs\RunStoreScanJob;
 use App\Models\Scan;
 use App\Models\ScanIssue;
 use App\Models\ShopifyStore;

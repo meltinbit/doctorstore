@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\IssueType;
-use App\Enums\ResourceType;
+use DoctorStore\Core\Enums\IssueType;
+use DoctorStore\Core\Enums\ResourceType;
 use App\Models\Scan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

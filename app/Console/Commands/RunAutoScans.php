@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\ScanStatus;
-use App\Jobs\RunStoreScanJob;
 use App\Models\ShopifyStore;
+use DoctorStore\Core\Enums\ScanStatus;
+use DoctorStore\Core\Jobs\RunStoreScanJob;
 use Cron\CronExpression;
 use Illuminate\Console\Command;
 

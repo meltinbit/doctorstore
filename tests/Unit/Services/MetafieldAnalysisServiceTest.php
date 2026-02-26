@@ -1,8 +1,8 @@
 <?php
 
-use App\Enums\IssueType;
-use App\Enums\ResourceType;
-use App\Services\MetafieldAnalysisService;
+use DoctorStore\Core\Enums\IssueType;
+use DoctorStore\Core\Enums\ResourceType;
+use DoctorStore\Core\Services\MetafieldAnalysisService;
 
 beforeEach(function () {
     $this->service = new MetafieldAnalysisService();

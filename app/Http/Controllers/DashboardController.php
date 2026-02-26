@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ScanStatus;
+use DoctorStore\Core\Enums\ScanStatus;
 use App\Models\Scan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

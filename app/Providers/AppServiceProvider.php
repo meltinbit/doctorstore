@@ -2,33 +2,29 @@
 
 namespace App\Providers;
 
+use App\Mail\StoreScanSummaryMail;
 use Carbon\CarbonImmutable;
+use DoctorStore\Core\Events\StoreScanCompleted;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->registerEventListeners();
     }
 
-    /**
-     * Configure default behaviors for production-ready applications.
-     */
     protected function configureDefaults(): void
     {
         Date::use(CarbonImmutable::class);
@@ -46,5 +42,16 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised()
             : null,
         );
+    }
+
+    protected function registerEventListeners(): void
+    {
+        Event::listen(StoreScanCompleted::class, function (StoreScanCompleted $event): void {
+            if ($event->store->email_summary_enabled && $event->store->email_summary_address) {
+                Mail::to($event->store->email_summary_address)->queue(
+                    new StoreScanSummaryMail($event->store, $event->scan)
+                );
+            }
+        });
     }
 }

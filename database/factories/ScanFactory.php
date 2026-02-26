@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\ScanStatus;
+use DoctorStore\Core\Enums\ScanStatus;
 use App\Models\ShopifyStore;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
